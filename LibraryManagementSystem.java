@@ -28,12 +28,22 @@ public class LibraryManagementSystem{
     public void borrowBook(String userID, String bookID){
         User user = userDB.findElement(userID);
         Book book = bookDB.findElement(bookID);
+
+        if (user == null) {
+            System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
+            return;
+        }
         
+        if (book == null) {
+            System.out.println("책 ID가 존재하지 않습니다: " + bookID);
+            return;
+        }
+
         this.loanDB.put(user, book);
     }
 
     public <T extends DB_Element> void printDB(LibDB<T> db){
-        db.printAllElement();
+        db.printAllElements();
     }
 
     public void printLoanList(){
@@ -82,14 +92,14 @@ public class LibraryManagementSystem{
 
         return bookDB;
     }
-    
+
     // public LibDB<Book> setBookDB(String bookFile){
-        // this.bookDB.addElement(new Book("B01", "Java Programming", "홍길동", "ABC", 2000));
-        // this.bookDB.addElement(new Book("B02", "Software Analysis and Design", "profsHwang", "SMU", 20230));
-        // this.bookDB.addElement(new Book("B03", "명품 자바프로그래밍", "황기태", "생능출판", 2025));
-        // this.bookDB.addElement(new Book("B04", "소프트웨어 테스트", "profsHwang", "SMU", 2024));
-        
-        // return this.bookDB;
+    // this.bookDB.addElement(new Book("B01", "Java Programming", "홍길동", "ABC", 2000));
+    // this.bookDB.addElement(new Book("B02", "Software Analysis and Design", "profsHwang", "SMU", 20230));
+    // this.bookDB.addElement(new Book("B03", "명품 자바프로그래밍", "황기태", "생능출판", 2025));
+    // this.bookDB.addElement(new Book("B04", "소프트웨어 테스트", "profsHwang", "SMU", 2024));
+
+    // return this.bookDB;
     // }
 
     public LibDB<User> setUserDB(String userFile) {
@@ -97,7 +107,7 @@ public class LibraryManagementSystem{
 
         // try-with-resources: FileReader와 Scanner를 자동으로 닫음
         try (FileReader fr = new FileReader(file);
-             Scanner sc = new Scanner(fr)) {
+        Scanner sc = new Scanner(fr)) {
 
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();
@@ -118,12 +128,12 @@ public class LibraryManagementSystem{
 
         return userDB;
     }
-    
-    // public LibDB<User> setUserDB(String userFile){
-        // this.userDB.addElement(new User(2025320001, "Kim"));
-        // this.userDB.addElement(new User(2024320002, "Lee"));
-        // this.userDB.addElement(new User(2023320003, "Park"));
 
-        // return this.userDB;
+    // public LibDB<User> setUserDB(String userFile){
+    // this.userDB.addElement(new User(2025320001, "Kim"));
+    // this.userDB.addElement(new User(2024320002, "Lee"));
+    // this.userDB.addElement(new User(2023320003, "Park"));
+
+    // return this.userDB;
     // }
 }

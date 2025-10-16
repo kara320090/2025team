@@ -14,13 +14,13 @@ public class App {
     static public void main(String args[]){
         LibraryManagementSystem LMS = new LibraryManagementSystem();
         
-        LibDB userDB = LMS.setUserDB("UserData2025.txt");
+        LibDB<User> userDB = LMS.setUserDB("UserData2025.txt");
         
         System.out.println("----- 이용자 목록 출력 -----");
         LMS.printDB(userDB);
         System.out.println();
         
-        LibDB bookDB = LMS.setBookDB("BookData2025.txt");
+        LibDB<Book> bookDB = LMS.setBookDB("BookData2025.txt");
         
         System.out.println("----- 책 목록 출력 -----");
         LMS.printDB(bookDB);

@@ -31,7 +31,7 @@ public class LibDB<T extends DB_Element> {
         return null;
     }
 
-    public void printAllElement() {
+    public void printAllElements() {
         for (T e : db) {
             System.out.println(e);
         }
