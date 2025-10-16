@@ -9,17 +9,17 @@ public class User extends DB_Element {
     private String name;
     private Integer stID;
     
-    public User(Integer stID, String name){
+    public User(int stID, String name){
         this.name = name;
         this.stID = stID;
     }
     @Override
     public String getID() { 
-        return stID.toString(); 
+        return this.stID.toString(); 
     }
 
     @Override
     public String toString() {
-        return "[" + stID + "] " + name;
+        return "[" + this.stID + "] " + this.name;
     }
 }

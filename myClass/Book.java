@@ -21,7 +21,7 @@ public class Book extends DB_Element {
     }
     @Override
     public String getID(){
-        return bookID;
+        return this.bookID;
     }
     
     @Override
