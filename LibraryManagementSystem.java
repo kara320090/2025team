@@ -17,9 +17,9 @@ import myClass.DB_Element;
  * @version (버전 번호 또는 작성한 날짜)
  */
 public class LibraryManagementSystem{
-    LibDB<Book> bookDB = new LibDB<Book>();
-    HashMap<User, Book> loanDB = new HashMap<User, Book>();
-    LibDB<User> userDB = new LibDB<User>();
+    private LibDB<Book> bookDB = new LibDB<Book>();
+    private HashMap<User, Book> loanDB = new HashMap<User, Book>();
+    private LibDB<User> userDB = new LibDB<User>();
 
     public LibraryManagementSystem(){
 
