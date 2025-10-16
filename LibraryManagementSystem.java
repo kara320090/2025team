@@ -17,16 +17,19 @@ import myClass.DB_Element;
  * @version (버전 번호 또는 작성한 날짜)
  */
 public class LibraryManagementSystem{
-
+    LibDB<Book> bookDB;
+    HashMap<User, Book> loanDB;
+    LibDB<User> userDB;
+    
     public LibraryManagementSystem(){
-        LibDB<Book> bookDB = new LibDB<Book>();
-        HashMap<User, Book> loanDB = new HashMap<User, Book>();
-        LibDB<User> userDB = new LibDB<User>();
+        this.bookDB = new LibDB<Book>();
+        this.loanDB = new HashMap<User, Book>();
+        this.userDB = new LibDB<User>();
     }
 
     public void borrowBook(String userID, String bookID){
-        User user = userDB.findElement(userID);
-        Book book = bookDB.findElement(bookID);
+        User user = this.userDB.findElement(userID);
+        Book book = this.bookDB.findElement(bookID);
 
         if (user == null) {
             System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
