@@ -17,12 +17,11 @@ import myClass.DB_Element;
  * @version (버전 번호 또는 작성한 날짜)
  */
 public class LibraryManagementSystem{
-    private LibDB<Book> bookDB = new LibDB<Book>();
-    private HashMap<User, Book> loanDB = new HashMap<User, Book>();
-    private LibDB<User> userDB = new LibDB<User>();
 
     public LibraryManagementSystem(){
-
+        LibDB<Book> bookDB = new LibDB<Book>();
+        HashMap<User, Book> loanDB = new HashMap<User, Book>();
+        LibDB<User> userDB = new LibDB<User>();
     }
 
     public void borrowBook(String userID, String bookID){
@@ -33,7 +32,7 @@ public class LibraryManagementSystem{
             System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
             return;
         }
-        
+
         if (book == null) {
             System.out.println("책 ID가 존재하지 않습니다: " + bookID);
             return;
