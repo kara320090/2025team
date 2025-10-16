@@ -56,10 +56,10 @@ public class LibraryManagementSystem{
     }
 
     public LibDB<Book> setBookDB(String bookFile) {
-        File file = new File(bookFile); // ① File 객체 생성
+        File file = new File(bookFile); // File 객체 생성
 
         try {
-            // ② FileReader를 이용해서 Scanner 생성
+            // FileReader를 이용해서 Scanner 생성
             FileReader fr = new FileReader(file);
             Scanner sc = new Scanner(fr);
 
@@ -93,15 +93,6 @@ public class LibraryManagementSystem{
         return bookDB;
     }
 
-    // public LibDB<Book> setBookDB(String bookFile){
-    // this.bookDB.addElement(new Book("B01", "Java Programming", "홍길동", "ABC", 2000));
-    // this.bookDB.addElement(new Book("B02", "Software Analysis and Design", "profsHwang", "SMU", 20230));
-    // this.bookDB.addElement(new Book("B03", "명품 자바프로그래밍", "황기태", "생능출판", 2025));
-    // this.bookDB.addElement(new Book("B04", "소프트웨어 테스트", "profsHwang", "SMU", 2024));
-
-    // return this.bookDB;
-    // }
-
     public LibDB<User> setUserDB(String userFile) {
         File file = new File(userFile);
 
@@ -128,12 +119,4 @@ public class LibraryManagementSystem{
 
         return userDB;
     }
-
-    // public LibDB<User> setUserDB(String userFile){
-    // this.userDB.addElement(new User(2025320001, "Kim"));
-    // this.userDB.addElement(new User(2024320002, "Lee"));
-    // this.userDB.addElement(new User(2023320003, "Park"));
-
-    // return this.userDB;
-    // }
 }
