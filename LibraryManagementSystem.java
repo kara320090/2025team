@@ -89,7 +89,7 @@ public class LibraryManagementSystem{
             fr.close(); // FileReader 닫기
 
         } catch (IOException e) {
-            System.out.println("파일 읽기 오류: " + e.getMessage());
+            System.out.println("책 데이터 파일 읽기 실패");
         }
 
         return bookDB;
@@ -118,7 +118,7 @@ public class LibraryManagementSystem{
             fr.close();
         } catch (IOException e) {
             
-            System.out.println("파일 읽기 실패");
+            System.out.println("사용자 데이터 파일 읽기 실패");
         }
 
         return userDB;
