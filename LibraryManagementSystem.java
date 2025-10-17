@@ -20,7 +20,7 @@ public class LibraryManagementSystem{
     LibDB<Book> bookDB;
     HashMap<User, Book> loanDB;
     LibDB<User> userDB;
-    
+
     public LibraryManagementSystem(){
         this.bookDB = new LibDB<Book>();
         this.loanDB = new HashMap<User, Book>();
@@ -99,8 +99,9 @@ public class LibraryManagementSystem{
         File file = new File(userFile);
 
         // try-with-resources: FileReader와 Scanner를 자동으로 닫음
-        try (FileReader fr = new FileReader(file);
-        Scanner sc = new Scanner(fr)) {
+        try {
+            FileReader fr = new FileReader(file);
+            Scanner sc = new Scanner(fr);
 
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();
@@ -113,10 +114,11 @@ public class LibraryManagementSystem{
 
                 userDB.addElement(new User(id, name));
             }
-
+            
+            fr.close();
         } catch (IOException e) {
-            // 예외 처리: 파일 없음 또는 읽기 오류
-            System.out.println("파일 읽기 오류: " + e.getMessage());
+            
+            System.out.println("파일 읽기 실패");
         }
 
         return userDB;
