@@ -104,13 +104,13 @@ public class LibraryManagementSystem{
             Scanner sc = new Scanner(fr);
 
             while (sc.hasNextLine()) {
-                String line = sc.nextLine().trim();
+                String line = sc.nextLine();
                 if (line.isEmpty()) continue;
 
-                String[] parts = line.split("/");
+                String[] strings = line.split("/");
 
-                int id = Integer.parseInt(parts[0].trim());
-                String name = parts[1].trim();
+                int id = Integer.parseInt(strings[0]);
+                String name = strings[1];
 
                 userDB.addElement(new User(id, name));
             }
