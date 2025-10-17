@@ -13,8 +13,8 @@ import myClass.DB_Element;
 /**
  * LibraryManagementSystem 클래스의 설명을 작성하세요.
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2021320090 이봉헌, 2021320018 김준혁, 2024320003 니시 야스히로)
+ * @version (2025.10.1)
  */
 public class LibraryManagementSystem{
     LibDB<Book> bookDB;
