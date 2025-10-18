@@ -32,9 +32,9 @@ public class User extends DB_Element {
     }
 
     /**
-     * toString 메소드 - 이용자의 정보를 문자열로 반환한다.
+     * toString 메소드 - 이용자의 정보를 문자열 형태로 반환한다.
      *
-     * @return  이용자에 대한 정보
+     * @return  "[이용자 ID] 이름" 형식의 문자열
      */
     @Override
     public String toString() {
