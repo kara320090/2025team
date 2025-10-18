@@ -168,7 +168,6 @@ public class LibraryManagementSystem{
      * @return   책 데이터 베이스를 반환한다.
      */
     public LibDB<Book> setBookDB(String bookFile) {
-
         try {
             File file = new File(bookFile); // File 객체 생성
             Scanner sc = new Scanner(file); // FileReader객체를 전달하여 Scanner객체를 생성
