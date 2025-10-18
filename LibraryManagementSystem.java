@@ -15,7 +15,7 @@ import myClass.DB_Element;
  * LibraryManagementSystem 클래스의 설명을 작성하세요.
  *
  * @author (2021320090 이봉헌, 2021320018 김준혁, 2024320003 니시 야스히로)
- * @version (2025.10.1)
+ * @version (2025.10.19)
  */
 public class LibraryManagementSystem{
     LibDB<Book> bookDB; // 모든 책들에 대한 정보가 저장되는 책 데이터 베이스
