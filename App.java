@@ -5,10 +5,10 @@ import myClass.User;
 import DataBase.LibDB;
 
 /**
- * MyApp은 학생 생성 및 대출을 수행하는 클래스다
+ * App은 LibraryManagementSystem을 실행하고 이용자와 도서 정보를 불러와 대출과 현황을 확인하는 클래스이다
  *
  * @author (2021320090 이봉헌, 2021320018 김준혁, 2024320003 니시 야스히로)
- * @version (2025.10.1)
+ * @version (2025.10.19)
  */
 public class App {
     static public void main(String[] args){
