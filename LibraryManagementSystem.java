@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileReader;
@@ -17,37 +18,117 @@ import myClass.DB_Element;
  * @version (2025.10.1)
  */
 public class LibraryManagementSystem{
-    LibDB<Book> bookDB;
-    HashMap<User, Book> loanDB;
-    LibDB<User> userDB;
+    LibDB<Book> bookDB; // 모든 책들에 대한 정보가 저장되는 책 데이터 베이스
+    // HashMap<User, Book> loanDB; // 이용자와 해당 이용자가 대출한 책에 대한 정보가 저장되는 대출 데이터 베이스
+    HashMap<User, ArrayList<Book>> loanDB; // 이용자와 해당 이용자가 대출한 책들에 대한 정보가 저장되는 대출 데이터 베이스
+    LibDB<User> userDB; // 모든 이용자들에 대한 정보가 저장되는 이용자 데이터 베이스
 
+    // 책, 이용자, 대출 데이터 베이스에 각 자료형별 알맞은 객체를 생성하여 초기화 하는 메소드
     public LibraryManagementSystem(){
         this.bookDB = new LibDB<Book>();
-        this.loanDB = new HashMap<User, Book>();
+        //this.loanDB = new HashMap<User, Book>();
+        this.loanDB = new HashMap<User, ArrayList<Book>>();
         this.userDB = new LibDB<User>();
     }
 
+    // 이용자와 책의 id를 String타입으로 전달 받아 대출을 수행하는 메소드
     public void borrowBook(String userID, String bookID){
+        // 사용자의 id를 토대로 "이용자 데이터 베이스"에서 이용자 객체를 검색, 성공시 id에 해당되는 이용자 객체를, 실패시 null을 반환
         User user = this.userDB.findElement(userID);
+        // 마찬가지로 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
         Book book = this.bookDB.findElement(bookID);
 
-        if (user == null) {
+        if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
             System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
             return;
         }
 
-        if (book == null) {
+        if (book == null) { // 검색한 책 객체가 없는 경우 오류 문구 출력후 메소드 종료
             System.out.println("책 ID가 존재하지 않습니다: " + bookID);
             return;
         }
 
-        this.loanDB.put(user, book);
+        // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
+        // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
+        if(!(loanDB.containsKey(user))){
+            loanDB.put(user, new ArrayList<Book>());
+        }
+
+        // 이용자 객체와 책 객체가 둘다 존재하는 경우 대출 데이터 베이스에 정보를 저장
+        ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
+        nowUserBorrowBooks.add(book);
     }
 
+    public void borrowBook(String userID, ArrayList<String> bookIDs){
+        // 사용자의 id를 토대로 "이용자 데이터 베이스"에서 이용자 객체를 검색, 성공시 id에 해당되는 이용자 객체를, 실패시 null을 반환
+        User user = this.userDB.findElement(userID);
+
+        if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
+            System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
+            return;
+        }
+
+        // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
+        // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
+        if(!(loanDB.containsKey(user))){
+            loanDB.put(user, new ArrayList<Book>());
+        }
+
+        // 전달된 모든 책 아이디 들에 대하여 반복하여 수행
+        for(String bookID : bookIDs){
+            // 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
+            Book book = this.bookDB.findElement(bookID);
+
+            // 책이 검색되지 못한 경우 오류 문구를 출력한뒤 다음 책 아이디에 대하여 이어서 작업하기
+            if(book == null){
+                System.out.println(bookID + "가 존재하지 않습니다");
+                continue;
+            }
+
+            // 책 객체가 존재하는 경우에만 대출 데이터 베이스에 정보를 저장
+            ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
+            nowUserBorrowBooks.add(book);
+        }
+    }
+
+    public void borrowBook(String userID, String[] bookIDs){
+        // 사용자의 id를 토대로 "이용자 데이터 베이스"에서 이용자 객체를 검색, 성공시 id에 해당되는 이용자 객체를, 실패시 null을 반환
+        User user = this.userDB.findElement(userID);
+
+        if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
+            System.out.println("사용자 ID가 존재하지 않습니다: " + userID);
+            return;
+        }
+
+        // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
+        // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
+        if(!(loanDB.containsKey(user))){
+            loanDB.put(user, new ArrayList<Book>());
+        }
+
+        // 전달된 모든 책 아이디 들에 대하여 반복하여 수행
+        for(String bookID : bookIDs){
+            // 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
+            Book book = this.bookDB.findElement(bookID);
+
+            // 책이 검색되지 못한 경우 오류 문구를 출력한뒤 다음 책 아이디에 대하여 이어서 작업하기
+            if(book == null){
+                System.out.println(bookID + "가 존재하지 않습니다");
+                continue;
+            }
+
+            // 책 객체가 존재하는 경우에만 대출 데이터 베이스에 정보를 저장
+            ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
+            nowUserBorrowBooks.add(book);
+        }
+    }
+
+    // 책 데이터 베이스 또는 이용자 데이터 베이스를 전달 받아 모든 요소를 출력하는 메소드
     public <T extends DB_Element> void printDB(LibDB<T> db){
         db.printAllElements();
     }
 
+    // 이용자의 대출한 책 목록
     public void printLoanList(){
         for (User u : loanDB.keySet()) {
             System.out.print(u);
@@ -57,32 +138,27 @@ public class LibraryManagementSystem{
         }
     }
 
+    // 모든 책 목록에 대한 데이터 파일을 읽어와 책 데이터 베이스에 저장하는 기능
     public LibDB<Book> setBookDB(String bookFile) {
         File file = new File(bookFile); // File 객체 생성
 
         try {
-            // FileReader를 이용해서 Scanner 생성
-            FileReader fr = new FileReader(file);
-            Scanner sc = new Scanner(fr);
+            FileReader fr = new FileReader(file); // File객체를 전달하여 FileReader객체를 생성
+            Scanner sc = new Scanner(fr); // FileReader객체를 전달하여 Scanner객체를 생성
 
-            // 한 줄씩 읽기
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine().trim();
-                if (line.isEmpty()) continue; // 빈 줄 방지
+            while (sc.hasNextLine()) { // 다음 줄이 있을때만 while문 실행
+                String line = sc.nextLine(); // 현재 줄을 읽기
 
-                // "/" 기준으로 나누기
-                String[] parts = line.split("/");
+                String[] elems = line.split("/"); // "/"를 기준으로 읽어온 한줄을 분리하기
 
-                if (parts.length == 5) { // B01, 제목, 저자, 출판사, 연도
-                    String id = parts[0].trim();
-                    String title = parts[1].trim();
-                    String author = parts[2].trim();
-                    String publisher = parts[3].trim();
-                    int year = Integer.parseInt(parts[4].trim());
+                String id = elems[0]; // 책의 아이디
+                String title = elems[1]; // 책의 제목 
+                String author = elems[2]; // 책의 저자
+                String publisher = elems[3]; // 책의 출판사
+                int year = Integer.parseInt(elems[4]); // 책의 출판년도, 정수로의 형변환을 수행
 
-                    // Book 객체 생성 후 DB에 추가
-                    bookDB.addElement(new Book(id, title, author, publisher, year));
-                }
+                // Book 객체 생성 후 DB에 추가
+                bookDB.addElement(new Book(id, title, author, publisher, year));
             }
 
             sc.close(); // Scanner 닫기
@@ -95,29 +171,30 @@ public class LibraryManagementSystem{
         return bookDB;
     }
 
+    // 모든 이용자 목록에 대한 데이터 파일을 읽어와 이용자 데이터 베이스에 저장하는 기능
     public LibDB<User> setUserDB(String userFile) {
-        File file = new File(userFile);
+        File file = new File(userFile); // File 객체 생성
 
-        // try-with-resources: FileReader와 Scanner를 자동으로 닫음
         try {
-            FileReader fr = new FileReader(file);
-            Scanner sc = new Scanner(fr);
+            FileReader fr = new FileReader(file); // File객체를 전달하여 FileReader객체를 생성
+            Scanner sc = new Scanner(fr); // FileReader객체를 전달하여 Scanner객체를 생성
 
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                if (line.isEmpty()) continue;
+            while (sc.hasNextLine()) { // 다음 줄이 있을때만 while문 실행
+                String line = sc.nextLine(); // 현재 줄을 읽기
 
-                String[] strings = line.split("/");
+                String[] elems = line.split("/"); // "/"를 기준으로 읽어온 한줄을 분리하기
 
-                int id = Integer.parseInt(strings[0]);
-                String name = strings[1];
+                int id = Integer.parseInt(elems[0]); // 사용자의 아이디, 정수로의 형변환을 수행
+                String name = elems[1]; // 사용자의 이름
 
+                // User 객체 생성 후 DB에 추가
                 userDB.addElement(new User(id, name));
             }
-            
-            fr.close();
+
+            sc.close(); // Scanner 닫기
+            fr.close(); // FileReader 닫기
+
         } catch (IOException e) {
-            
             System.out.println("사용자 데이터 파일 읽기 실패");
         }
 
