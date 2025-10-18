@@ -151,10 +151,10 @@ public class LibraryManagementSystem{
 
                 String[] elems = line.split("/"); // "/"를 기준으로 읽어온 한줄을 분리하기
 
-                String id = elems[0]; // 책의 아이디
-                String title = elems[1]; // 책의 제목 
-                String author = elems[2]; // 책의 저자
-                String publisher = elems[3]; // 책의 출판사
+                String id = elems[0].trim(); // 책의 아이디
+                String title = elems[1].trim(); // 책의 제목 
+                String author = elems[2].trim(); // 책의 저자
+                String publisher = elems[3].trim(); // 책의 출판사
                 int year = Integer.parseInt(elems[4]); // 책의 출판년도, 정수로의 형변환을 수행
 
                 // Book 객체 생성 후 DB에 추가
@@ -184,8 +184,8 @@ public class LibraryManagementSystem{
 
                 String[] elems = line.split("/"); // "/"를 기준으로 읽어온 한줄을 분리하기
 
-                int id = Integer.parseInt(elems[0]); // 사용자의 아이디, 정수로의 형변환을 수행
-                String name = elems[1]; // 사용자의 이름
+                int id = Integer.parseInt(elems[0].trim()); // 사용자의 아이디, 정수로의 형변환을 수행
+                String name = elems[1].trim(); // 사용자의 이름
 
                 // User 객체 생성 후 DB에 추가
                 userDB.addElement(new User(id, name));
