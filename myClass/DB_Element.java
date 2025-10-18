@@ -1,4 +1,5 @@
 package myClass;
+
 /**
  * DB_Element는 학생 객채와 책객체의 getID를 사용하기 위해 정의한 추상형 메소드다
  *
