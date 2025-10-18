@@ -1,5 +1,5 @@
 import java.util.HashMap;
-
+import java.util.ArrayList;
 import myClass.Book;
 import myClass.User;
 import DataBase.LibDB;
@@ -13,23 +13,26 @@ import DataBase.LibDB;
 public class App {
     static public void main(String[] args){
         LibraryManagementSystem LibMS = new LibraryManagementSystem();
-        
+
         LibDB<User> userDB = LibMS.setUserDB("UserData2025.txt");
-        
+
         System.out.println("----- 이용자 목록 출력 -----");
         LibMS.printDB(userDB);
         System.out.println();
-        
+
         LibDB<Book> bookDB = LibMS.setBookDB("BookData2025.txt");
-        
+
         System.out.println("----- 책 목록 출력 -----");
         LibMS.printDB(bookDB);
         System.out.println();
-        
-        LibMS.borrowBook("2025320001", "B02");
+
+        ArrayList<String> books = new ArrayList<>();
+        books.add("B01");
+        books.add("B02");
+        LibMS.borrowBook("2025320001", books);
         LibMS.borrowBook("2024320002", "B03");
         LibMS.borrowBook("2023320003", "B04");
-        
+
         System.out.println("----- 대출 현황 -----");
         LibMS.printLoanList();
         System.out.println("--------------------");
