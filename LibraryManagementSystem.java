@@ -12,7 +12,7 @@ import myClass.Book;
 import myClass.DB_Element;
 
 /**
- * LibraryManagementSystem 클래스의 설명을 작성하세요.
+ * LibraryManagementSystem은 도서관 시스템에 대한 관리를 제공해주는 클래스 이다
  *
  * @author (2021320090 이봉헌, 2021320018 김준혁, 2024320003 니시 야스히로)
  * @version (2025.10.1)
