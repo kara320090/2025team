@@ -11,7 +11,7 @@ import DataBase.LibDB;
  * @version (2025.10.1)
  */
 public class App {
-    static public void main(String args[]){
+    static public void main(String[] args){
         LibraryManagementSystem LMS = new LibraryManagementSystem();
         
         LibDB<User> userDB = LMS.setUserDB("UserData2025.txt");
