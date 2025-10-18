@@ -25,6 +25,11 @@ public class App {
         System.out.println("----- 책 목록 출력 -----");
         LibMS.printDB(bookDB);
         System.out.println();
+        
+        // ArrayList<String> books = new ArrayList<String>();
+        // books.add("B01");
+        // books.add("B02");
+        // LibMS.borrowBook("2025320001", books);
 
         ArrayList<String> books = new ArrayList<>();
         books.add("B01");
