@@ -12,26 +12,26 @@ import DataBase.LibDB;
  */
 public class App {
     static public void main(String[] args){
-        LibraryManagementSystem LMS = new LibraryManagementSystem();
+        LibraryManagementSystem LibMS = new LibraryManagementSystem();
         
-        LibDB<User> userDB = LMS.setUserDB("UserData2025.txt");
+        LibDB<User> userDB = LibMS.setUserDB("UserData2025.txt");
         
         System.out.println("----- 이용자 목록 출력 -----");
-        LMS.printDB(userDB);
+        LibMS.printDB(userDB);
         System.out.println();
         
-        LibDB<Book> bookDB = LMS.setBookDB("BookData2025.txt");
+        LibDB<Book> bookDB = LibMS.setBookDB("BookData2025.txt");
         
         System.out.println("----- 책 목록 출력 -----");
-        LMS.printDB(bookDB);
+        LibMS.printDB(bookDB);
         System.out.println();
         
-        LMS.borrowBook("2025320001", "B02");
-        LMS.borrowBook("2024320002", "B03");
-        LMS.borrowBook("2023320003", "B04");
+        LibMS.borrowBook("2025320001", "B02");
+        LibMS.borrowBook("2024320002", "B03");
+        LibMS.borrowBook("2023320003", "B04");
         
         System.out.println("----- 대출 현황 -----");
-        LMS.printLoanList();
+        LibMS.printLoanList();
         System.out.println("--------------------");
     }
 }
