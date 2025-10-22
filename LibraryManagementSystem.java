@@ -1,8 +1,6 @@
 import java.util.HashMap;
-import java.util.ArrayList;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -15,12 +13,11 @@ import myClass.DB_Element;
  * LibraryManagementSystem 클래스의 설명을 작성하세요.
  *
  * @author (2024320003 니시 야스히로)
- * @version (2025.10.19)
+ * @version (2025.10.22)
  */
 public class LibraryManagementSystem{
     LibDB<Book> bookDB; // 모든 책들에 대한 정보가 저장되는 책 데이터 베이스
-    // HashMap<User, Book> loanDB; // 이용자와 해당 이용자가 대출한 책에 대한 정보가 저장되는 대출 데이터 베이스
-    HashMap<User, ArrayList<Book>> loanDB; // 이용자와 해당 이용자가 대출한 책들에 대한 정보가 저장되는 대출 데이터 베이스
+    HashMap<User, Book> loanDB; // 이용자와 해당 이용자가 대출한 책에 대한 정보가 저장되는 대출 데이터 베이스
     LibDB<User> userDB; // 모든 이용자들에 대한 정보가 저장되는 이용자 데이터 베이스
 
     /**
@@ -31,7 +28,7 @@ public class LibraryManagementSystem{
     public LibraryManagementSystem(){
         this.bookDB = new LibDB<Book>();
         //this.loanDB = new HashMap<User, Book>();
-        this.loanDB = new HashMap<User, ArrayList<Book>>();
+        this.loanDB = new HashMap<User, Book>();
         this.userDB = new LibDB<User>();
     }
 
@@ -57,18 +54,9 @@ public class LibraryManagementSystem{
             return;
         }
 
-        // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
-        // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
-        if(!(loanDB.containsKey(user))){
-            loanDB.put(user, new ArrayList<Book>());
-        }
-
         // 이용자 객체와 책 객체가 둘다 존재하는 경우 대출 데이터 베이스에 정보를 저장
-        ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
-        nowUserBorrowBooks.add(book);
+        this.loanDB.put(user, book);
     }
-
-    
 
     /**
      * 책 데이터 베이스 또는 이용자 데이터 베이스를 전달 받아 모든 요소를 출력하는 메소드
