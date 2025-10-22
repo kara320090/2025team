@@ -44,16 +44,6 @@ public class LibraryManagementSystem{
         // 마찬가지로 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
         Book book = this.bookDB.findElement(bookID);
 
-        if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
-            System.out.println("이용자 ID가 존재하지 않습니다: " + userID);
-            return;
-        }
-
-        if (book == null) { // 검색한 책 객체가 없는 경우 오류 문구 출력후 메소드 종료
-            System.out.println("책 ID가 존재하지 않습니다: " + bookID);
-            return;
-        }
-
         // 이용자 객체와 책 객체가 둘다 존재하는 경우 대출 데이터 베이스에 정보를 저장
         this.loanDB.put(user, book);
     }
