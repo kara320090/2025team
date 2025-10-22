@@ -1,5 +1,3 @@
-import java.util.HashMap;
-import java.util.ArrayList;
 import myClass.Book;
 import myClass.User;
 import DataBase.LibDB;
@@ -24,7 +22,7 @@ public class App {
 
         System.out.println("----- 책 목록 출력 -----");
         LibMS.printDB(bookDB);
-        System.out.println();
+        System.out.println();   
         
         LibMS.borrowBook("2025320001", "B02");
         LibMS.borrowBook("2024320002", "B03");
