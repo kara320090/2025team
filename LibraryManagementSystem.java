@@ -68,75 +68,7 @@ public class LibraryManagementSystem{
         nowUserBorrowBooks.add(book);
     }
 
-    /** 
-     * @overload
-     * 이용자와 책의 id를 String타입으로 전달 받아 대출을 수행하는 메소드를 overload하여 책의 id가 여러개일 경우 ArrayList<String> 타입으로 전달받아 대출을 수행하는 메소드
-     *
-     * @param   userID, bookIDs 이용자(stID)와 책(bookID)들의 ArrayList<String>
-     */
-    public void borrowBook(String userID, ArrayList<String> bookIDs){
-        // 이용자의 id를 토대로 "이용자 데이터 베이스"에서 이용자 객체를 검색, 성공시 id에 해당되는 이용자 객체를, 실패시 null을 반환
-        User user = this.userDB.findElement(userID);
-
-        if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
-            System.out.println("이용자 ID가 존재하지 않습니다: " + userID);
-            return;
-        }
-
-        // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
-        // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
-        if(!(loanDB.containsKey(user))){
-            loanDB.put(user, new ArrayList<Book>());
-        }
-
-        // 전달된 모든 책 아이디 들에 대하여 반복하여 수행
-        for(String bookID : bookIDs){
-            // 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
-            Book book = this.bookDB.findElement(bookID);
-
-            // 책이 검색되지 못한 경우 오류 문구를 출력한뒤 다음 책 아이디에 대하여 이어서 작업하기
-            if(book == null){
-                System.out.println(bookID + "가 존재하지 않습니다");
-                continue;
-            }
-
-            // 책 객체가 존재하는 경우에만 대출 데이터 베이스에 정보를 저장
-            ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
-            nowUserBorrowBooks.add(book);
-        }
-    }
-
-    // public void borrowBook(String userID, String[] bookIDs){
-    // 이용자의 id를 토대로 "이용자 데이터 베이스"에서 이용자 객체를 검색, 성공시 id에 해당되는 이용자 객체를, 실패시 null을 반환
-    // User user = this.userDB.findElement(userID);
-
-    // if (user == null) { // 검색한 이용자 객체가 없는 경우 오류 문구 출력후 메소드 종료
-    // System.out.println("이용자 ID가 존재하지 않습니다: " + userID);
-    // return;
-    // }
-
-    // 검색한 이용자 객체가 대출 데이터 베이스 속에서 키로 존재하지 않는 경우 초기화 진행
-    // 이를 토대로 추후에 해당 유저의 키에 대하여 대출한 책들을 add가능
-    // if(!(loanDB.containsKey(user))){
-    // loanDB.put(user, new ArrayList<Book>());
-    // }
-
-    // 전달된 모든 책 아이디 들에 대하여 반복하여 수행
-    // for(String bookID : bookIDs){
-    // 책의 id를 토대로 "책 데이터 베이스"에서 책 객체를 검색, 성공시 id에 해당되는 책 객체를, 실패시 null을 반환
-    // Book book = this.bookDB.findElement(bookID);
-
-    // 책이 검색되지 못한 경우 오류 문구를 출력한뒤 다음 책 아이디에 대하여 이어서 작업하기
-    // if(book == null){
-    // System.out.println(bookID + "가 존재하지 않습니다");
-    // continue;
-    // }
-
-    // 책 객체가 존재하는 경우에만 대출 데이터 베이스에 정보를 저장
-    // ArrayList<Book> nowUserBorrowBooks = this.loanDB.get(user);
-    // nowUserBorrowBooks.add(book);
-    // }
-    // }
+    
 
     /**
      * 책 데이터 베이스 또는 이용자 데이터 베이스를 전달 받아 모든 요소를 출력하는 메소드
