@@ -11,7 +11,7 @@ import myClass.DB_Element;
 
 /**
  * LibraryManagementSystem 클래스의 설명을 작성하세요.
- *
+ * 
  * @author (2024320003 니시 야스히로)
  * @version (2025.10.22)
  */
