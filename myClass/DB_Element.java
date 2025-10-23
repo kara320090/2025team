@@ -1,7 +1,8 @@
 package myClass;
 
 /**
- * DB_Element는 학생 객채와 책객체의 getID를 사용하기 위해 정의한 추상형 메소드다
+ * DB_Element는 Book 클래스와 User 클래스에서 사용할 getID 추상 메소드를 정의하는 추상 클래스이다.
+ * 
  *
  * @author (2021320018 김준혁)
  * @version (2025.10.22)
